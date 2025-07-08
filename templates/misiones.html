@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🧩 Earth Quest – 365 Misiones</title>
+  <link rel="stylesheet" href="../static/misiones.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧩 Earth Quest – 365 Misiones</h1>
+      <p>Elige el día y completa tu misión para ayudar al planeta 🌎</p>
+      <p id="contador-misiones">Misiones completadas: 0 ✅</p>
+    </header>
+
+    <main class="calendar">
+      <!-- Días de la semana -->
+      <div class="day-name">Dom</div>
+      <div class="day-name">Lun</div>
+      <div class="day-name">Mar</div>
+      <div class="day-name">Mié</div>
+      <div class="day-name">Jue</div>
+      <div class="day-name">Vie</div>
+      <div class="day-name">Sáb</div>
+
+      <!-- Ejemplo de primeros 7 días -->
+      <div class="day" onclick="mostrarMision(1)">1</div>
+      <div class="day" onclick="mostrarMision(2)">2</div>
+      <div class="day" onclick="mostrarMision(3)">3</div>
+      <div class="day" onclick="mostrarMision(4)">4</div>
+      <div class="day" onclick="mostrarMision(5)">5</div>
+      <div class="day" onclick="mostrarMision(6)">6</div>
+      <div class="day" onclick="mostrarMision(7)">7</div>
+
+      <!-- Popup misión -->
+      <div id="mision" class="mision-popup">
+        <p id="mision-texto"></p>
+        <button onclick="completarMision()">¡Misión cumplida!</button>
+        <button onclick="cerrarMision()">Cerrar</button>
+      </div>
+    </main>
+
+    <footer>
+      © 2025 EcoFun – ¡Una misión a la vez, cambiamos el mundo!
+    </footer>
+  </div>
+
+  <script>
+    const misiones = {
+      1: "♻️ Misión 1: Separa correctamente tus residuos hoy.",
+      2: "💧 Misión 2: Ahorra 5 minutos en tu ducha.",
+      3: "🌱 Misión 3: Planta una semilla o cuida una planta.",
+      4: "🚴 Misión 4: Usa la bicicleta o camina si puedes.",
+      5: "📴 Misión 5: Desconecta cargadores innecesarios.",
+      6: "🛍️ Misión 6: Usa bolsa reutilizable para tus compras.",
+      7: "📚 Misión 7: Aprende algo nuevo sobre el clima."
+    };
+  
+    let diaActual = null;
+  
+    function mostrarMision(dia) {
+      diaActual = dia;
+      document.getElementById("mision-texto").innerText = misiones[dia] || "🌍 No hay misión para este día aún.";
+      document.getElementById("mision").style.display = "block";
+    }
+  
+    function cerrarMision() {
+      document.getElementById("mision").style.display = "none";
+    }
+  
+    function completarMision() {
+      if (diaActual) {
+        fetch("/completar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ dia: diaActual })
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("contador-misiones").innerText = `Misiones completadas: ${data.completadas} ✅`;
+          // Marcar botón como completado
+          const diaBoton = document.querySelector(`.day[onclick="mostrarMision(${diaActual})"]`);
+          if (diaBoton) {
+            diaBoton.classList.add("completado");
+          }
+          cerrarMision();
+        });
+      }
+    }
+  
+    // Al cargar la página
+    window.onload = function () {
+      fetch("/conteo")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("contador-misiones").innerText = `Misiones completadas: ${data.completadas} ✅`;
+          // Marcar visualmente los días completados
+          data.dias.forEach(dia => {
+            const diaBoton = document.querySelector(`.day[onclick="mostrarMision(${parseInt(dia)})"]`);
+            if (diaBoton) {
+              diaBoton.classList.add("completado");
+            }
+          });
+        });
+    };
+  </script>
+  
+  
+</body>
+</html>

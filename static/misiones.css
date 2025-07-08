@@ -1,0 +1,98 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, #dbeafe, #f0fdf4);
+  margin: 0;
+  padding: 0;
+  color: #1e293b;
+}
+
+.container {
+  text-align: center;
+}
+
+header {
+  background-color: #2563eb;
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.day-name {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.day {
+  background-color: #bbf7d0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.day:hover {
+  background-color: #a5f3fc;
+  transform: scale(1.05);
+}
+
+.mision-popup {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background-color: #f0fdf4;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.mision-popup p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.mision-popup button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+footer {
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.day.completado {
+  background-color: #4ade80 !important;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.day.completado:hover {
+  background-color: #22c55e !important;
+  transform: scale(1.05);
+}

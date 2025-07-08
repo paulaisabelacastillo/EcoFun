@@ -1,0 +1,6 @@
+Yo necesitaria estas librerias:
+SpeechRecognition
+pyttsx3
+flask
+discord
+random 

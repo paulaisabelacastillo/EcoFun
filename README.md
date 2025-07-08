@@ -1,1 +1,2 @@
-# EcoFun
+## Esta es la idea de mi proyecto:
+> quiero realizar una app web donde habra un bot de Discord por medio de voz, donde compartes memes, aprendes datos curiosos y completas misiones para salvar el planeta jugando. usando las platillas del bot de discord, la del sitio web de memes y la el diario de un programador.
